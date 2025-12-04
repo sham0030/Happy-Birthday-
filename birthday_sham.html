@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy Birthday Meri Jan</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap');
+    :root{
+      --bg:#0f172a;
+      --card:#0b1220;
+      --accent:#ff4da6;
+      --accent2:#ffd166;
+    }
+    html,body{height:100%;margin:0;font-family:Nunito;}
+    body{
+      background: radial-gradient(1200px 600px at 10% 20%, rgba(255,77,166,0.12), transparent),
+                  radial-gradient(900px 500px at 90% 80%, rgba(255,209,102,0.08), transparent),
+                  var(--bg);
+      display:flex;align-items:center;justify-content:center;padding:20px;
+      color:white;
+      overflow-x:hidden;
+    }
+    .card{
+      width:100%;max-width:900px;background:rgba(255,255,255,0.05);
+      border-radius:18px;padding:32px;box-shadow:0 10px 30px rgba(2,6,23,0.6);text-align:center;
+      position:relative;overflow:hidden;
+      animation: fadeIn 1.5s ease;
+    }
+    @keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+    h1{margin:6px 0;font-size:48px;color:var(--accent);animation: pop 1.2s ease;}
+    @keyframes pop{0%{transform:scale(0.5);opacity:0;}100%{transform:scale(1);opacity:1;}}
+    .heart{font-size:30px;margin-top:6px;color:#ff6fa8;animation: heartbeat 1.6s infinite;}
+    @keyframes heartbeat{
+      0%{transform:scale(1);}
+      50%{transform:scale(1.25);}
+      100%{transform:scale(1);}
+    }
+    .btn{
+      display:inline-block;margin-top:18px;padding:12px 22px;border-radius:999px;
+      background:linear-gradient(90deg,var(--accent),var(--accent2));color:#0b1220;
+      text-decoration:none;font-weight:700;
+      animation: fadeIn 1.7s ease;
+    }
+    footer{margin-top:20px;font-size:14px;color:#bfc7d6;animation: fadeIn 2s ease;}
+    .creator{font-size:13px;margin-top:6px;color:#ffd166;animation: glow 2s infinite alternate;}
+    @keyframes glow{from{opacity:0.4;}to{opacity:1;}}
+    /* confetti */
+    .confetti-piece{
+      position:absolute;width:10px;height:18px;opacity:0;
+      transform-origin:center;
+      animation:fall 3.6s linear infinite;
+    }
+    @keyframes fall{
+      0%{transform:translateY(-120%) rotate(0deg);opacity:1;}
+      100%{transform:translateY(120%) rotate(720deg);opacity:0;}
+    }
+    /* overlay */
+    .overlay{
+      position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+      background:rgba(5,10,20,0.85);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:.3s;
+    }
+    .overlay.open{opacity:1;pointer-events:auto;}
+    .message{padding:36px;border-radius:14px;background:rgba(255,255,255,0.05);text-align:center;box-shadow:0 10px 40px rgba(2,6,23,0.6);}
+    .message h2{font-size:44px;margin:6px 0;color:var(--accent);}
+    .close-btn{margin-top:18px;display:inline-block;padding:8px 14px;border-radius:10px;background:#fff;color:#000;font-weight:700;text-decoration:none;}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Happy Birthday — Meri Jan</h1>
+    <p style="font-size:20px;color:#e6e6e6;">Aaj ka din bohat khaas hai — tumhari khushi meri khushi ❤️</p>
+    <div class="heart">💖</div>
+    <a href="#" id="openMsg" class="btn">Click karo 🎉</a>
+
+    <footer>Sent with love 💌</footer>
+    <div class="creator">Created by Sham ✨</div>
+  </div>
+
+  <div id="confettiContainer"></div>
+
+  <div id="overlay" class="overlay">
+    <div class="message">
+      <h2>Happy Birthday Meri Jan!</h2>
+      <p>Tumhari muskurahat sabse zyada khoobsurat hai. 🎂✨</p>
+      <a id="closeBtn" class="close-btn" href="#">Close</a>
+    </div>
+  </div>
+
+  <script>
+    const colors = ['#ff6fa8','#ffd166','#7ae7ff','#9bffb0','#ff9b72'];
+    const container = document.getElementById('confettiContainer');
+    for(let i=0;i<40;i++){
+      const el = document.createElement('div');
+      el.className = 'confetti-piece';
+      el.style.left = Math.random()*100+'%';
+      el.style.top = Math.random()*-20+'%';
+      el.style.background = colors[i % colors.length];
+      el.style.width = (6 + Math.random()*12)+'px';
+      el.style.height = (10 + Math.random()*18)+'px';
+      el.style.animationDelay = (Math.random()*2)+'s';
+      container.appendChild(el);
+    }
+
+    const overlay = document.getElementById('overlay');
+    document.getElementById('openMsg').onclick = e => { e.preventDefault(); overlay.classList.add('open'); };
+    document.getElementById('closeBtn').onclick = e => { e.preventDefault(); overlay.classList.remove('open'); };
+  </script>
+</body>
+</html>
